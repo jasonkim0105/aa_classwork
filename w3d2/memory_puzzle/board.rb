@@ -34,18 +34,29 @@ class Board
       end
     end
     return @grid
-<<<<<<< HEAD
-=======
   end
 
   def render
-    p @grid
->>>>>>> a902c49f5fe8c00465c804dd90bcb9cb4a01afeb
+    return @grid
+  end
+
+  def won?
+    @grid.each do |row|
+      row.each do |card|
+        return false if card.face_down == true
+      end
+    end
+    return true
+  end
+
+  def reveal(guessed_pos)
+    card = @grid[guessed_pos[0]][guessed_pos[1]]
+    if card.face_down == true
+      card.to_s
+      return card.face_value
+    end
   end
 
 end
 
-<<<<<<< HEAD
 # p Board.populate
-=======
->>>>>>> a902c49f5fe8c00465c804dd90bcb9cb4a01afeb
