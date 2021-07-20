@@ -16,11 +16,15 @@ attr_reader :face_value
   end
 
   def to_s #if face_down is true return " " else return face_value
-    
+    if @face_down == true
+      return ' '
+    else
+      return @face_value
+    end
   end
 
-  def == #compare two cards to see they are the same and return true if so
-
+  def ==(card2) #compare two cards to see they are the same and return true if so
+    self.face_value == card2.face_value
   end
 
   # def hide

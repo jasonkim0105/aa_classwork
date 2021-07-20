@@ -9,7 +9,17 @@ class Board
   end
 
   def make_cards #should return an array of all the cards, shuffled
-    values = ("A".."Z").to_a
+    cards = []
+    values = ("A".."Z").to_a.sample(8)
+    values.each do |ele|
+      one = Card.new(ele)
+      cards << one
+      cards << one
+    end
+
+
+    cards
+  end
 
   def populate # should place each card on a space on the grid
     i = 0
