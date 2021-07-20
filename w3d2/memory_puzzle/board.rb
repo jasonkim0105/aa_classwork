@@ -1,3 +1,5 @@
+require_relative "card"
+
 class Board
 
   attr_reader :grid
@@ -13,11 +15,10 @@ class Board
     values = ("A".."Z").to_a.sample(8)
     values.each do |ele|
       one = Card.new(ele)
+      two = Card.new(ele)
       cards << one
-      cards << one
+      cards << two
     end
-
-
     cards
   end
 
