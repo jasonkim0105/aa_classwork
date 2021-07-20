@@ -13,26 +13,22 @@ class Board
     values = ("A".."Z").to_a.sample(8)
     values.each do |ele|
       one = Card.new(ele)
+      two = Card.new(ele)
       cards << one
-      cards << one
+      cards << two
     end
-
-
-    cards
+    cards.sample(16)
   end
 
   def populate # should place each card on a space on the grid
-    i = 0
-    j = 0
-    while j < 16
-        card = Card.new()
-        while i < 2
-            row = rand(0...grid.length)
-            col = rand(0...grid.length)
-            @grid[row][col] = card
-            i += 1
+    cards = make_cards
+    (0...size).each do |row|
+      (0...size).each do |col|
+        cards.each do |ele|
+          @grid[row][col] = ele
         end
-        j += 1
+        cards.delete_at(-1)
+      end
     end
   end
 
