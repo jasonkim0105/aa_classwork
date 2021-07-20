@@ -5,7 +5,10 @@ class Board
   def initialize(size = 4)
     @size = size
     @grid = Array.new(@size) {Array.new(@size)}
+<<<<<<< HEAD
 
+=======
+>>>>>>> a902c49f5fe8c00465c804dd90bcb9cb4a01afeb
   end
 
   def make_cards #should return an array of all the cards, shuffled
@@ -31,8 +34,18 @@ class Board
       end
     end
     return @grid
+<<<<<<< HEAD
+=======
+  end
+
+  def render
+    p @grid
+>>>>>>> a902c49f5fe8c00465c804dd90bcb9cb4a01afeb
   end
 
 end
 
+<<<<<<< HEAD
 # p Board.populate
+=======
+>>>>>>> a902c49f5fe8c00465c804dd90bcb9cb4a01afeb
