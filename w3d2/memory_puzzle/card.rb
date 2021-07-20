@@ -11,18 +11,14 @@ attr_reader :face_value
 
   def hide
     if @face_up_down == @face_up
-      true
-    else
-      false
+      @face_up_down = @face_down
     end
   end
 
-  def reveal 
-    if self.up_or_down 
-      @face_value
-    end
+  def reveal
+    @face_value
   end
-      
+
 
   # def hide
   #   if !self.up_or_down
