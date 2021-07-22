@@ -1,3 +1,4 @@
+
 def range_recursive(start, last)
 
     return [] if last == start
@@ -74,21 +75,43 @@ def fib_recur(n) #fib_recur(4) -> [0, 1, 1, 2, 3]
   fibz
 
 end
-  # arr = [0, 1]
-  # (2..n).each do |num|
-  #   arr << fib_recur(num-1)[-1] + fib_recur(num-2)[-1]
-
-  # end
-  # arr
-
-  #fib_recur(3) ->      fib(2)        +      fib(1)
-
-  # p fib
-  # arr << fib
-            #fib_recur(3)  +        fib_recur(2) - > 3
-  #fib_recur(2) + fib_recur(1)    fib_recur(1) + fib_recur(0) -> 1
 
 
-p fib_recur(2)
-p fib_recur(4)
-p fib_recur(10)
+
+#find middle index
+# compare target to middle index
+#   if ==, return index
+# if target < mid, search mid of left side
+# if target > mid, search mid of right side
+# repeat until target == mid element, OR everything has been searched
+
+
+
+def bsearch(arr, target)
+
+    return nil if arr.length == 0
+
+  
+    mid_i = arr.length / 2
+
+
+    return mid_i if target == arr[mid_i]
+
+    if target < arr[mid_i]
+        bsearch(arr[0...mid_i], target)
+    else target > arr[mid_i]
+        right = bsearch(arr[mid_i+1..-1], target)
+        return nil if right == nil
+        right + mid_i + 1
+    end
+
+end
+
+p bsearch([1, 2, 3], 1) # => 0
+p bsearch([2, 3, 4, 5], 3) # => 1
+p bsearch([2, 4, 6, 8, 10], 6) # => 2
+p bsearch([1, 3, 4, 5, 9], 5) # => 3
+p bsearch([1, 2, 3, 4, 5, 6], 6) # => 5
+p bsearch([1, 2, 3, 4, 5, 6], 0) # => nil
+p bsearch([1, 2, 3, 4, 5, 7], 6) # => nil
+
