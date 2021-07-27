@@ -91,7 +91,7 @@ def bsearch(arr, target)
 
     return nil if arr.length == 0
 
-  
+
     mid_i = arr.length / 2
 
 
@@ -107,11 +107,37 @@ def bsearch(arr, target)
 
 end
 
-p bsearch([1, 2, 3], 1) # => 0
-p bsearch([2, 3, 4, 5], 3) # => 1
-p bsearch([2, 4, 6, 8, 10], 6) # => 2
-p bsearch([1, 3, 4, 5, 9], 5) # => 3
-p bsearch([1, 2, 3, 4, 5, 6], 6) # => 5
-p bsearch([1, 2, 3, 4, 5, 6], 0) # => nil
-p bsearch([1, 2, 3, 4, 5, 7], 6) # => nil
+# p bsearch([1, 2, 3], 1) # => 0
+# p bsearch([2, 3, 4, 5], 3) # => 1
+# p bsearch([2, 4, 6, 8, 10], 6) # => 2
+# p bsearch([1, 3, 4, 5, 9], 5) # => 3
+# p bsearch([1, 2, 3, 4, 5, 6], 6) # => 5
+# p bsearch([1, 2, 3, 4, 5, 6], 0) # => nil
+# p bsearch([1, 2, 3, 4, 5, 7], 6) # => nil
 
+
+class Array
+  def merge_sort
+
+   return self if self.length == 0
+   return self if self.length == 1
+
+    mid_I = self.length / 2
+
+    left = self[0...mid_I]
+    right = self[mid_i..-1]
+    leftz = left.merge_sort
+    rightz = right.merge_sort
+
+    merge(leftz, rightz)
+  end
+
+
+  def merge(arr1, arr2)
+    sort = []
+    arr1.each_with_index do |el, i|
+      if arr1[i] < arr2[i]
+        sort << arr[i]
+  end
+
+end
