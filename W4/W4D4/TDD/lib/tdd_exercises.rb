@@ -31,4 +31,20 @@ class Array
     newArr
   end
 
+  def stock_picker
+    profit = 0
+    pair = []
+
+    (0...self.length - 1).each do |i|
+      (i+1...self.length).each do |j|
+        if self[j] - self[i] > profit
+          pair = [i,j] 
+          profit = self[j] - self[i]
+        end
+      end
+    end
+
+    pair
+  end
+
 end
