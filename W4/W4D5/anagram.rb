@@ -24,7 +24,21 @@ def second_anagram?(str1, str2)
     arr2.empty?
 end
 
+def third_anagram?(str1, str2)
+
+    str1.split('').sort == str2.split('').sort
+end
+
+def fourth_anagram?(str1, str2)
+    hash1 = Hash.new(0)
+    hash2 = Hash.new(0)
+
+    str1.each_char {|char| hash1[char] += 1}
+    str2.each_char {|char| hash2[char] += 1}
+
+    hash1 == hash2
+end
 
 
-p second_anagram?("lives", "elvis")
-p second_anagram?("gizmo", "sally")
+p fourth_anagram?("lives", "elvis")
+p fourth_anagram?("gizmo", "sally")
