@@ -9,4 +9,10 @@ class Course < ApplicationRecord
     primary_key: :id,
     foreign_key: :id,
     class_name: :User
+
+  # belongs_to :enrollments,
+  #   primary_key: :id,
+  #   foreign_key: :course_id,
+  #   class_name: :Enrollment
+
 end
