@@ -16,6 +16,11 @@ ActiveRecord::Schema.define(version: 2021_08_05_233428) do
   enable_extension "plpgsql"
 
   create_table "shortened_urls", force: :cascade do |t|
+    t.string "long_url"
+    t.string "short_url"
+    t.integer "user_id", null: false
+    t.index ["long_url"], name: "index_shortened_urls_on_long_url", unique: true
+    t.index ["short_url"], name: "index_shortened_urls_on_short_url", unique: true
   end
 
   create_table "users", force: :cascade do |t|
