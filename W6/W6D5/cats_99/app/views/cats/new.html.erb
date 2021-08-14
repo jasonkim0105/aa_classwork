@@ -1,0 +1,25 @@
+<form action="/cats" method="post">
+<label for="birth_date">Birth_Date</label>
+<input id="birth_date" type="date" name="cat[birth_date]" value="<%= @cat.birth_date %>">
+
+<label for="color">Color</label>
+<select name="cat[color]">
+ <option disabled selected>-- Select --</option>
+ <option value="black">Black</option>
+ <option value="white">White</option>
+ <option value="yellow">Yellow</option>
+ <option value="brown">Brown</option>
+ </select>
+<label for="name">Name</label>
+<input id="name" type="text" name="cat[name]" value="<%= @cat.name %>">
+
+<label for="sex">Sex</label>
+<label for="M">M:</label>
+<input id="M" type="Radio" name="cat[sex]" value="M">
+<label for="F">F:</label>
+<input id="F" type="Radio" name="cat[sex]" value="F">
+<label for="description">Description</label>
+<input id="description" type="textarea" name="cat[description]" value="<%= @cat.description %>">
+
+<input type="submit" value="Create Cat">
+</form>
