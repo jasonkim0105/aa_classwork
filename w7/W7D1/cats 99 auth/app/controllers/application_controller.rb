@@ -1,4 +1,4 @@
-class ApplicationController < ActionController::urlsafe_base64
+class ApplicationController < ActionController::Base
 
   helper_method :current_user, :logout!, :logged_in?
 

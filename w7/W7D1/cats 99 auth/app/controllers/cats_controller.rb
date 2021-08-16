@@ -1,4 +1,7 @@
 class CatsController < ApplicationController
+
+  before_action :require_i_own_this_cat, only: [:edit, :update]
+
   def index
     @cats = Cat.all
     render :index
@@ -16,6 +19,7 @@ class CatsController < ApplicationController
 
   def create
     @cat = Cat.new(cat_params)
+    @cat.owner_id = current_user.id    # does this even work?
     if @cat.save
       redirect_to cat_url(@cat)
     else
@@ -37,6 +41,10 @@ class CatsController < ApplicationController
       flash.now[:errors] = @cat.errors.full_messages
       render :edit
     end
+  end
+
+  def require_i_own_this_cat
+    redirect_to cats_url unless current_user.id == @cat.owner_id
   end
 
   private

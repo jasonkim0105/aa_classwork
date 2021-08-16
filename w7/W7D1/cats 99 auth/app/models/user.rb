@@ -1,12 +1,22 @@
 class User < ApplicationRecord
+  require 'bcrypt'
+
   validates :username, :email, :session_token, presence: true, uniqueness: true
   validates :age, :passwords_digest, presence: true
   validates :password, length: {minimum: 6}, allow_nil: true
 
   attr_reader :password
 
-  before_validation :ensure_session_token
-  after_initialize :ensure_session_token
+  before_validation :ensure_session_token!
+  # after_initialize :ensure_session_token!
+
+  has_many :cats,
+    foreign_key: :user_id,
+    class_name: :Cat
+
+  has_many :cat_rental_requests,
+    foreign_key: :user_id,
+    class_name: :CatRentalRequest
 
   def password=(password)
 	  self.password_digest = BCrypt::Password.create(password)
@@ -14,7 +24,7 @@ class User < ApplicationRecord
   end
 
   def ensure_session_token!
-    self.session_token ||= SecureRandom::urlsafe_base64
+    self.session_token ||= SecureRandom::urlsafe_base64(16)
   end
 
   def self.find_by_credentials(username, password)
@@ -32,9 +42,11 @@ class User < ApplicationRecord
   end
 
   def reset_session_token!
-    self.session_token = SecureRandom::urlsafe_base64
+    self.session_token = SecureRandom::urlsafe_base64(16)
     self.save!
     self.session_token
   end
+
+
 
 end

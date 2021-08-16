@@ -5,7 +5,7 @@ class SessionsController < ApplicationController
   end
 
   def create
-    @user = User.find_by_credentials(params[:user][:username], [:user][:password])
+    @user = User.find_by_credentials(params[:user][:username], params[:user][:password])
 
     if @user
       login(@user)
@@ -22,6 +22,7 @@ class SessionsController < ApplicationController
 
   before_action  :require_logged_out, only: [:new, :create]
   before_action :require_logged_in, only: [:destroy]
+  before_action :require_i_own_this_cat, only: [:edit, :update]
 
 
 end
