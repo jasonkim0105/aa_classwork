@@ -5,7 +5,7 @@
     <th>Attribute</th>
     <th>Value</th>
   </tr>
-  <% [:age, :birth_date, :color, :sex].each do |attr_name| %>
+  <% [:age, :birth_date, :color, :sex, :description].each do |attr_name| %>
     <tr>
       <td><%= attr_name %></td>
       <td><%= @cat.send(attr_name) %></td>
@@ -13,7 +13,7 @@
   <% end %>
 </table>
 
-<% if current_user.id == @cat.owner_id %>
+<% if current_user.id == @cat.user_id %>
   <a href="<%= edit_cat_url(@cat) %>">Edit <%= @cat.name %></a>
 <% end %>
 

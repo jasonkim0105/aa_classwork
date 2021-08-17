@@ -6,10 +6,10 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.find_by_credentials(params[:user][:username], params[:user][:password])
-    if @user
-      login(@user)
-      redirect_to users_url
+    @user = User.new(user_params)
+    if @user.save
+      login_user!(@user)
+      redirect_to cats_url
     else
       render :new
     end
