@@ -1,4 +1,3 @@
-<h1>Edit Cats </h1>
 <form action="/cats" method="post">
   <input type="hidden" name="_method" value = "PATCH">
 
@@ -29,4 +28,6 @@
   <input id="description" type="textarea" name="cat[description]" value="<%= @cat.description %>">
 
   <input type="submit" value="Create Cat">
+
+  <%= render 'form', cat: @cat %>
 </form>

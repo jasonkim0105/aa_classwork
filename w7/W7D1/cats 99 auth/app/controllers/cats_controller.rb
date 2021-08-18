@@ -18,6 +18,7 @@ class CatsController < ApplicationController
   end
 
   def create
+    puts "this is the cats_controller"
     @cat = Cat.new(cat_params)
     @cat.user_id = current_user.id    # does this even work?
     if @cat.save
@@ -54,6 +55,6 @@ class CatsController < ApplicationController
   private
 
   def cat_params
-    params.require(:cat).permit(:age, :birth_date, :color, :description, :name, :sex)
+    params.require(:cat).permit(:age, :birth_date, :color, :description, :name, :sex, :user_id)
   end
 end

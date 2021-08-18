@@ -1,3 +1,4 @@
+<h1>Create A New Cat</h1>
 <form action="/cats" method="post">
 <label for="birth_date">Birth_Date</label>
 <input id="birth_date" type="date" name="cat[birth_date]" value="<%= @cat.birth_date %>">
@@ -18,6 +19,7 @@
 <input id="M" type="Radio" name="cat[sex]" value="M">
 <label for="F">F:</label>
 <input id="F" type="Radio" name="cat[sex]" value="F">
+
 <label for="description">Description</label>
 <input id="description" type="textarea" name="cat[description]" value="<%= @cat.description %>">
 

@@ -6,6 +6,7 @@ class UsersController < ApplicationController
   end
 
   def create
+    puts "this is the users_controller"
     @user = User.new(user_params)
     if @user.save
       login_user!(@user)
