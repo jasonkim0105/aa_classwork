@@ -13,7 +13,7 @@ class BandsController < ApplicationController
   def create
     @band = Band.new(band_params)
     if @band.save
-      redirect_to band_url(@band)
+      redirect_to bands_url
     else
       render :new
     end
@@ -25,8 +25,8 @@ class BandsController < ApplicationController
   end
 
   def edit
-    @band = Band.find_by(id: params[:id]
-    render :edit)
+    @band = Band.find(params[:id])
+    render :edit
   end
 
 
