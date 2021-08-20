@@ -35,6 +35,11 @@ class User < ApplicationRecord
     self.session_token
   end
 
+  has_many :subs,
+    primary_key: :id,
+    foreign_key: :moderator_id,
+    class_name: :Sub
+
   private
 
   def ensure_session_token
