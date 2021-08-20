@@ -1,0 +1,28 @@
+// Use the gear_dropdown.png screenshot as a style guide
+
+.fa.fa-cog{
+    font-size: 15px;
+	border-color:black;
+	padding: 5px 5px 5px 5px;
+	transition: 0.3s;
+	text-align: center;
+}
+
+#gear-dropdown:hover{
+    background-color: #999;
+    border-radius: 3px;
+
+}
+
+li {
+	position: relative;
+}
+
+.gear-dropdown {
+	position: absolute;
+	display: none;
+}
+
+.gear-dropdown:hover {
+	display: block;
+}
