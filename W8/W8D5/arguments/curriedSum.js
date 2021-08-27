@@ -14,6 +14,29 @@
 //   };
 // }
 
+// Function.prototype.curry = function (numArgs) {
+//   const args = [];
+//   let that = this
+//   return function _curriedFunction(arg) {
+//     args.push(arg);
+//     if (args.length === numArgs) {
+//       return that(...args);
+//     } else {
+//       return _curriedFunction;
+//     }
+//   };
+// }
+// Function.prototype.curry = function (numArgs) {
+//   let that = this;
+//   return function _curriedFunction(...args) {
+//     if (args.length === numArgs) {
+//       return that(...args);
+//     } else {
+//       return _curriedFunction;
+//     }
+//   };
+// }
+
 Function.prototype.curry = function (numArgs) {
   const args = [];
   let that = this
@@ -33,15 +56,15 @@ Function.prototype.curry = function (numArgs) {
 function multiply(...args) {
 
   let total = 1;
-  console.log(args)
+  // console.log(args)
   for (let i = 0; i < args.length; i++) {
     total *= args[i];
-    
+
   }
-  console.log(total);
+  // console.log(total);
   return total;
 }
 
 // console.log(multiply(5, 3, 2))
 
-console.log(multiply.curry(3)(5)(3)(2));
+console.log(multiply.curry(3)(5, 3, 2));
