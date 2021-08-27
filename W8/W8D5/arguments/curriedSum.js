@@ -20,7 +20,7 @@ Function.prototype.curry = function (numArgs) {
   return function _curriedFunction(arg) {
     args.push(arg);
     if (args.length === numArgs) {
-      that(args)
+      return that(...args);
     } else {
       return _curriedFunction;
     }
@@ -30,13 +30,15 @@ Function.prototype.curry = function (numArgs) {
 // const sum = curriedSum(4);
 // console.log(sum(5)(30)(20)(1)); // => 56
 
-function multiply(args) {
+function multiply(...args) {
 
   let total = 1;
   console.log(args)
   for (let i = 0; i < args.length; i++) {
     total *= args[i];
+    
   }
+  console.log(total);
   return total;
 }
 
