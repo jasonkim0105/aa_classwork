@@ -1,9 +1,20 @@
-Function.prototype.myBind = function (context, ...bindArgs) {
+// Function.prototype.myBind = function (context, ...bindArgs) {
+//   const that = this;
+//   return function(...callArgs) {
+//     return that.apply(context, bindArgs.concat(callArgs));
+//   };
+// }
+
+Function.prototype.myBind = function (context) {
   const that = this;
-  return function(...callArgs) {
+  let bindArgs = Array.from(arguments).slice(1);
+  return function() {
+    let callArgs = Array.from(arguments);
     return that.apply(context, bindArgs.concat(callArgs));
   };
 }
+
+
 
 class Cat {
   constructor(name) {
@@ -35,9 +46,9 @@ markov.says.myBind(pavlov, "meow", "Kush")();
 // true
 
 // no bind time args (other than context), call time args are "meow" and "a tree"
-markov.says.myBind(pavlov)("meow", "a tree");
-// Pavlov says meow to a tree!
-// true
+markov.says.myBind(pavlov)( "meow", "a tree");
+// // Pavlov says meow to a tree!
+// // true
 
 // bind time arg is "meow", call time arg is "Markov"
 markov.says.myBind(pavlov, "meow")("Markov");
