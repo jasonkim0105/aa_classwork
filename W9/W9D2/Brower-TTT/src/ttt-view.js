@@ -29,21 +29,31 @@ class View {
     ul.style.flexWrap = "wrap";
     ul.setAttribute("id", "grid");
 
-    //Hover listeners
-    ul.addEventListener("mouseover", (e) => {
-      let ele = e.target;
-      ele.style.background = "yellow";
-    });
-    ul.addEventListener("mouseout", handleTest = (e) => {
-      let ele = e.target;
-      ele.style.background = "gray";
-    });
+ 
   }
 
   bindEvents() {
     const ul = document.getElementById("grid");
+
+       //Hover listeners
+      let mouseOn = function(e){
+        let ele = e.target;
+        ele.style.background = "yellow";
+      }
+
+      let mouseOff = function (e){
+        let ele = e.target;
+        ele.style.background = "gray";
+      }
+
+    ul.addEventListener("mouseover", mouseOn);
+
+    ul.addEventListener("mouseout", mouseOff);
+
     ul.addEventListener("click", (e) => {
       this.handleClick(e.target);
+      // ul.removeEventListener("mouseout", mouseOff);
+      // ul.removeEventListener("mouseover", mouseOn);
     });
   }
 
@@ -52,10 +62,19 @@ class View {
     let parsedPos = JSON.parse(pos);
     this.game.playMove(parsedPos);
     this.makeMove(e);
+
+    if (this.game.isOver()){
+      let message = document.createElement("h1");
+      message.append(`You Won ${this.game.currentPlayer}`);
+      this.el.append(message);
+    }
   }
 
   makeMove(square) {
     square.style.background = "white";
+    square.append(this.game.currentPlayer);
+    square.style.textAlign = "center";
+    square.style.fontSize = "40px"
   }
 
 }
