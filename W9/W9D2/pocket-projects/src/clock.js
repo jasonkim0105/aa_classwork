@@ -16,6 +16,8 @@ export default class Clock {
 
     // 4. Schedule the tick at 1 second intervals.
     setInterval(this._tick.bind(this), 1000);
+
+    htmlGenerator(this.printTime(), clockDiv);
   }
 
   printTime() {
@@ -32,7 +34,7 @@ export default class Clock {
     this._incrementSeconds();
 
     // 2. Call printTime.
-    this.printTime();
+    htmlGenerator(this.printTime(), clockDiv);
   }
 
   _incrementSeconds() {
@@ -58,7 +60,6 @@ export default class Clock {
 }
 
 const clock = new Clock();
-htmlGenerator(clock.printTime(), clockDiv);
 
 
 
