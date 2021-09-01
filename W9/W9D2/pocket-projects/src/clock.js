@@ -1,4 +1,4 @@
-import warmUp from "./warmup";
+import {htmlGenerator} from "./warmup";
 const clockDiv = document.querySelector("#clock");
 
 export default class Clock {
@@ -23,6 +23,7 @@ export default class Clock {
     const timeString = [this.hours, this.minutes, this.seconds].join(":");
 
     // Use console.log to print it.
+    
     return timeString;
   }
 
@@ -57,7 +58,7 @@ export default class Clock {
 }
 
 const clock = new Clock();
-// htmlGenerator(clock.printTime(), clockDiv);
-warmUp.htmlGenerator(clock.printTime(), clockDiv)
+htmlGenerator(clock.printTime(), clockDiv);
+
 
 

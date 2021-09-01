@@ -1,4 +1,3 @@
-
 const partyHeader = document.getElementById('party');
 
 export const htmlGenerator = (string, htmlElement) => {
