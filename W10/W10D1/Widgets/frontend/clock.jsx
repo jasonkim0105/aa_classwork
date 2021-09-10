@@ -19,17 +19,29 @@ class Clock extends React.Component {
     let minute = this.state.date.getMinutes();
     let second = this.state.date.getSeconds();
 
+    function convertTime(num) {
+      return (num < 10) ? `0${num}` : num;
+    }
+
     return (
-      <h1>{hour}:{minute}:{second}</h1>
+      <div className="clockContainer">
+        <div className="timeContainer"><p>Time: </p>
+        <span className="clock">{convertTime(hour)}:{convertTime(minute)}:{convertTime(second)}</span>
+        </div>
+        <div className="timeContainer"><p>Date: </p>
+        <span>{this.state.date.getDate()}</span>
+        </div>
+      </div>
+
     )
   }
 
   componentDidMount() {
-    const interval = setInterval(this.tick, 1000)
+    this.interval = setInterval(this.tick, 1000)
   }
 
   componentWillUnmount() {
-    
+    clearInterval(this.interval);
   }
 }
 
