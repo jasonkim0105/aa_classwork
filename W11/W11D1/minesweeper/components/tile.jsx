@@ -3,11 +3,39 @@ import * as Minesweeper from "../minesweeper.js";
 
 class Tile extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
+    this.handleClick = this.handleClick.bind(this);
   }
+
+  handleClick(e) {
+    this.props.updateGame(this.props.tile, e.altKey);
+  }
+
   render() {
+    const tile = this.props.tile;
+    let symbol;
+    let klass = "";
+
+    if (tile.explored) {
+      klass = "explored"
+      if (tile.bombed) {
+        klass = "bombed";
+        symbol = "&#128163";// bomb symbol
+      } else if (tile.adjacentBombCount()) {
+        symbol = `${tile.adjacentBombCount()}`;
+      } else {
+        symbol = "";
+      }
+    } else if (tile.flagged) {
+      klass = "flagged"
+      symbol = "&#9873";
+    } else {
+      klass = "unexplored"
+      symbol = "";
+    }
+
     return (
-      <div>T</div>
+      <div className={`tile-${klass}`} onClick={this.handleClick}>{symbol}</div>
     )
   }
 }

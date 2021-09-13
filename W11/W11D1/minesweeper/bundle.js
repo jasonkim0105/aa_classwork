@@ -55,8 +55,19 @@ var Board = /*#__PURE__*/function (_React$Component) {
   _createClass(Board, [{
     key: "render",
     value: function render() {
-      var grid = this.props.board.grid.map(function (row, index) {
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_tile_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], null));
+      var _this = this;
+
+      var grid = this.props.board.grid.map(function (row, i) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "row",
+          key: i
+        }, row.map(function (tile, j) {
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_tile_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], {
+            tile: tile,
+            updateGame: _this.props.updateGame,
+            key: [i, j]
+          });
+        }));
       });
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, grid);
     }
@@ -136,7 +147,8 @@ var Game = /*#__PURE__*/function (_React$Component) {
     key: "render",
     value: function render() {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_board_jsx__WEBPACK_IMPORTED_MODULE_3__["default"], {
-        board: this.state.board
+        board: this.state.board,
+        updateGame: this.updateGame
       }));
     }
   }]);
@@ -191,15 +203,50 @@ var Tile = /*#__PURE__*/function (_React$Component) {
   var _super = _createSuper(Tile);
 
   function Tile(props) {
+    var _this;
+
     _classCallCheck(this, Tile);
 
-    return _super.call(this, props);
+    _this = _super.call(this, props);
+    _this.handleClick = _this.handleClick.bind(_assertThisInitialized(_this));
+    return _this;
   }
 
   _createClass(Tile, [{
+    key: "handleClick",
+    value: function handleClick(e) {
+      this.props.updateGame(this.props.tile, e.altKey);
+    }
+  }, {
     key: "render",
     value: function render() {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "T");
+      var tile = this.props.tile;
+      var symbol;
+      var klass = "";
+
+      if (tile.explored) {
+        klass = "explored";
+
+        if (tile.bombed) {
+          klass = "bombed";
+          symbol = "&#128163"; // bomb symbol
+        } else if (tile.adjacentBombCount()) {
+          symbol = "".concat(tile.adjacentBombCount());
+        } else {
+          symbol = "";
+        }
+      } else if (tile.flagged) {
+        klass = "flagged";
+        symbol = "&#9873";
+      } else {
+        klass = "unexplored";
+        symbol = "";
+      }
+
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "tile-".concat(klass),
+        onClick: this.handleClick
+      }, symbol);
     }
   }]);
 
