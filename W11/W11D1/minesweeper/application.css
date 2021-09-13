@@ -8,3 +8,30 @@
   width: 20px;
   height: 20px;
 }
+
+.tile-explored {
+  background: rgb(167, 164, 164);
+  border-style: inset;
+  width: 20px;
+  height: 20px;
+}
+
+.tile-flagged {
+  background: rgb(217, 217, 217);
+  border-style: outset;
+  width: 20px;
+  height: 20px;
+}
+
+.tile-bombed {
+  background: rgb(167, 164, 164);
+  border-style: inset;
+  width: 20px;
+  height: 20px;
+}
+
+.alert {
+  position: absolute;
+  width: 100vw;
+  height: 100vw;
+}

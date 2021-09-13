@@ -20,7 +20,7 @@ class Tile extends React.Component {
       klass = "explored"
       if (tile.bombed) {
         klass = "bombed";
-        symbol = "&#128163";// bomb symbol
+        symbol = "\u2622";// bomb symbol
       } else if (tile.adjacentBombCount()) {
         symbol = `${tile.adjacentBombCount()}`;
       } else {
@@ -28,7 +28,7 @@ class Tile extends React.Component {
       }
     } else if (tile.flagged) {
       klass = "flagged"
-      symbol = "&#9873";
+      symbol = "\u2691";
     } else {
       klass = "unexplored"
       symbol = "";

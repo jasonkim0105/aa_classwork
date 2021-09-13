@@ -142,14 +142,28 @@ var Game = /*#__PURE__*/function (_React$Component) {
 
   _createClass(Game, [{
     key: "updateGame",
-    value: function updateGame() {}
+    value: function updateGame(tileObj, flagging) {
+      if (flagging) {
+        tileObj.toggleFlag();
+        this.setState({
+          board: this.state.board
+        });
+      } else {
+        tileObj.explore();
+        this.setState({
+          board: this.state.board
+        });
+      }
+    }
   }, {
     key: "render",
     value: function render() {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_board_jsx__WEBPACK_IMPORTED_MODULE_3__["default"], {
         board: this.state.board,
         updateGame: this.updateGame
-      }));
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "alert"
+      }, this.state.board.won() ? "You won!" : "", this.state.board.lost() ? "You lost!" : ""));
     }
   }]);
 
@@ -229,7 +243,7 @@ var Tile = /*#__PURE__*/function (_React$Component) {
 
         if (tile.bombed) {
           klass = "bombed";
-          symbol = "&#128163"; // bomb symbol
+          symbol = "\u2622"; // bomb symbol
         } else if (tile.adjacentBombCount()) {
           symbol = "".concat(tile.adjacentBombCount());
         } else {
@@ -237,7 +251,7 @@ var Tile = /*#__PURE__*/function (_React$Component) {
         }
       } else if (tile.flagged) {
         klass = "flagged";
-        symbol = "&#9873";
+        symbol = "\u2691";
       } else {
         klass = "unexplored";
         symbol = "";

@@ -14,12 +14,25 @@ class Game extends React.Component {
     this.updateGame= this.updateGame.bind(this);
   }
 
-  updateGame() {
+  updateGame(tileObj, flagging) {
+    if (flagging) {
+      tileObj.toggleFlag();
+      this.setState({ board: this.state.board })
+    } else {
+      tileObj.explore();
+      this.setState({ board: this.state.board })
+    }
   }
 
   render() {
     return (
-      <div><Board board={this.state.board} updateGame={this.updateGame}/></div>
+      <div>
+        <Board board={this.state.board} updateGame={this.updateGame}/>
+        <div className="alert">
+          {this.state.board.won() ? "You won!" : ""}
+          {this.state.board.lost() ? "You lost!" : ""}
+        </div>
+      </div>
     );
   }
 }
