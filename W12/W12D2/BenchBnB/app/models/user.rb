@@ -8,6 +8,7 @@
 #  email           :string           not null
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
+#  session_token   :string           not null
 #
 class User < ApplicationRecord
   validates :email, :password_digest, :username, presence: true
