@@ -4,11 +4,11 @@ class Api::UsersController < ApplicationController
   end
 
   def create
-    @user = User.new(UserParams)
+    @user = User.new(user_params)
 
     if @user.save!
       login(@user)
-      redirect_to root_url
+      render :show
     else
       flash[:errors] = ['Access Denied, Invalid Credentials']
       render :new
@@ -26,7 +26,7 @@ class Api::UsersController < ApplicationController
 
 
   private
-  def UserParams
+  def user_params
     params.require(:user).permit(:password,:username,:email)
   end
 
