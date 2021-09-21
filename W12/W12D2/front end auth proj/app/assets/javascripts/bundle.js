@@ -159,16 +159,24 @@ var unLikeChirp = exports.unLikeChirp = function unLikeChirp(id) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.logout = exports.login = exports.createNewUser = exports.LOGOUT_CURRENT_USER = exports.RECEIVE_CURRENT_USER = undefined;
+exports.logout = exports.login = exports.createNewUser = exports.LOGIN_CURRENT_USER = exports.LOGOUT_CURRENT_USER = exports.RECEIVE_CURRENT_USER = undefined;
 
 var _session = __webpack_require__(/*! ../utils/session */ "./frontend/utils/session.js");
 
 var RECEIVE_CURRENT_USER = exports.RECEIVE_CURRENT_USER = 'RECEIVE_CURRENT_USER';
 var LOGOUT_CURRENT_USER = exports.LOGOUT_CURRENT_USER = 'LOGOUT_CURRENT_USER';
+var LOGIN_CURRENT_USER = exports.LOGIN_CURRENT_USER = 'LOGIN_CURRENT_USER';
 
 var receiveCurrentUser = function receiveCurrentUser(user) {
   return {
     type: RECEIVE_CURRENT_USER,
+    user: user
+  };
+};
+
+var loginCurrentUser = function loginCurrentUser(user) {
+  return {
+    type: LOGIN_CURRENT_USER,
     user: user
   };
 };
@@ -291,6 +299,8 @@ var _home2 = _interopRequireDefault(_home);
 
 var _reactRouterDom = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
 
+var _route_utils = __webpack_require__(/*! ../utils/route_utils */ "./frontend/utils/route_utils.jsx");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = function () {
@@ -300,7 +310,7 @@ exports.default = function () {
     _react2.default.createElement(_reactRouterDom.Route, { path: '/', component: _nav_bar_container2.default }),
     _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', component: _home2.default }),
     _react2.default.createElement(_reactRouterDom.Route, { path: '/chirps', component: _chirp_index_container2.default }),
-    _react2.default.createElement(_reactRouterDom.Route, { path: '/signup', component: _signup_container2.default })
+    _react2.default.createElement(_route_utils.AuthRoute, { path: '/signup', component: _signup_container2.default })
   );
 };
 
@@ -545,9 +555,71 @@ exports.default = function () {
   !*** ./frontend/components/nav_bar/nav_bar.jsx ***!
   \*************************************************/
 /*! no static exports found */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
-throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nSyntaxError: Unexpected token, expected : (10:3)\n\n\u001b[0m \u001b[90m  8 | \u001b[39m      \u001b[33m<\u001b[39m\u001b[33mLink\u001b[39m className\u001b[33m=\u001b[39m\u001b[32m\"btn\"\u001b[39m to\u001b[33m=\u001b[39m\u001b[32m\"/login\"\u001b[39m\u001b[33m>\u001b[39m\u001b[33mLog\u001b[39m \u001b[33mIn\u001b[39m\u001b[33m<\u001b[39m\u001b[33m/\u001b[39m\u001b[33mLink\u001b[39m\u001b[33m>\u001b[39m\n \u001b[90m  9 | \u001b[39m    \u001b[33m<\u001b[39m\u001b[33m/\u001b[39m\u001b[33mdiv\u001b[39m\u001b[33m>\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 10 | \u001b[39m  )\u001b[33m;\u001b[39m\n \u001b[90m    | \u001b[39m   \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 11 | \u001b[39m\n \u001b[90m 12 | \u001b[39m  \u001b[36mreturn\u001b[39m (\n \u001b[90m 13 | \u001b[39m    \u001b[33m<\u001b[39m\u001b[33mheader\u001b[39m className\u001b[33m=\u001b[39m\u001b[32m\"nav-bar\"\u001b[39m\u001b[33m>\u001b[39m\u001b[0m\n");
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = __webpack_require__(/*! react */ "./node_modules/react/react.js");
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRouterDom = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = function (_ref) {
+  var currentUser = _ref.currentUser,
+      logout = _ref.logout;
+
+  var display = currentUser ? _react2.default.createElement(
+    'div',
+    null,
+    _react2.default.createElement(
+      'p',
+      null,
+      'Hello, ',
+      currentUser.username
+    ),
+    _react2.default.createElement(
+      'button',
+      { onClick: logout },
+      'Log Out'
+    )
+  ) : _react2.default.createElement(
+    'div',
+    null,
+    _react2.default.createElement(
+      _reactRouterDom.Link,
+      { className: 'btn', to: '/signup' },
+      'Sign Up'
+    ),
+    _react2.default.createElement(
+      _reactRouterDom.Link,
+      { className: 'btn', to: '/login' },
+      'Log In'
+    )
+  );
+
+  return _react2.default.createElement(
+    'header',
+    { className: 'nav-bar' },
+    _react2.default.createElement(
+      'h1',
+      { className: 'logo' },
+      'BLUEBIRD'
+    ),
+    _react2.default.createElement(
+      'div',
+      null,
+      display
+    )
+  );
+};
 
 /***/ }),
 
@@ -753,6 +825,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+// import { withRouter } from 'react-router';
 
 var Signup = function (_React$Component) {
   _inherits(Signup, _React$Component);
@@ -1124,6 +1198,63 @@ var deleteLikeFromChirp = exports.deleteLikeFromChirp = function deleteLikeFromC
     data: { id: id }
   });
 };
+
+/***/ }),
+
+/***/ "./frontend/utils/route_utils.jsx":
+/*!****************************************!*\
+  !*** ./frontend/utils/route_utils.jsx ***!
+  \****************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.ProtectedRoute = exports.AuthRoute = undefined;
+
+var _react = __webpack_require__(/*! react */ "./node_modules/react/react.js");
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRedux = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+
+var _reactRouterDom = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var mapStateToProps = function mapStateToProps(state) {
+  return {
+    loggedIn: Boolean(state.session.currentUser)
+  };
+};
+
+var Auth = function Auth(_ref) {
+  var loggedIn = _ref.loggedIn,
+      path = _ref.path,
+      Component = _ref.component;
+  return _react2.default.createElement(_reactRouterDom.Route, { path: path,
+    render: function render(props) {
+      return loggedIn ? _react2.default.createElement(_reactRouterDom.Redirect, { to: '/' }) : _react2.default.createElement(Component, props);
+    }
+  });
+};
+
+var Protected = function Protected(_ref2) {
+  var loggedIn = _ref2.loggedIn,
+      path = _ref2.path,
+      Component = _ref2.component;
+  return _react2.default.createElement(_reactRouterDom.Route, { path: path,
+    render: function render(props) {
+      return loggedIn ? _react2.default.createElement(Component, props) : _react2.default.createElement(_reactRouterDom.Redirect, { to: '/signup' });
+    }
+  });
+};
+var AuthRoute = exports.AuthRoute = (0, _reactRouterDom.withRouter)((0, _reactRedux.connect)(mapStateToProps)(Auth));
+var ProtectedRoute = exports.ProtectedRoute = (0, _reactRouterDom.withRouter)((0, _reactRedux.connect)(mapStateToProps)(Protected));
 
 /***/ }),
 
