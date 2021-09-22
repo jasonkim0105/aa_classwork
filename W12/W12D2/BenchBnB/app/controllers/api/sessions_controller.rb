@@ -9,17 +9,19 @@ class Api::SessionsController < ApplicationController
   end
 
   def create
-    @user = User.find_by_credentials(params[:user][:username], params[:user][:password])
-    debugger
-
+    @user = User.find_by_credential(params[:user][:username], params[:user][:password])
+  
     if @user
       login(@user)
-      # redirect_to root_url
-      console.log(current_user)
+      # debugger
+      # # redirect_to root_url
+      # puts "HELLLOOOO"
+      # puts current_user.username
+      # puts "BYEEEEEE"
     else
       # render :new
       flash[:errors] = ['Access Denied, Invalid Credentials']
-      redirect_to new_session_url
+      redirect_to new_api_session_url
     end
   end
 
